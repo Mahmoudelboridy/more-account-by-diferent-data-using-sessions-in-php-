@@ -32,12 +32,29 @@ table {
     margin-right: auto;
 }
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <div style="width: 100%;height:100px;background-color:aqua">
     <ul>
         <li>user_name: <?php echo $_SESSION['name'] ?></li>
         <li>user_id: <?php echo $_SESSION['id'] ?></li>
         <li><a href="logout.php">logout</a></li>
     </ul>
+</div>
+
+<div style="margin-top:10px;float:right;width: 300px;height:200px;background-color:#fff9c4">
+    <?php
+$rd=$_SESSION['id'];
+$mes="SELECT * FROM `login` where user_id!='$rd'";
+$qmes=mysqli_query($conn,$mes);
+while($row=mysqli_fetch_assoc($qmes)){
+    $rowid=$row['user_id'];
+    echo $row['name']." <a href='message.php?user_id=$rowid' ><i class='fa-regular fa-envelope'></i></a><br><br>";
+}
+
+?>
 </div>
 
 <form action="" method="POST" enctype="multipart/form-data">
